@@ -3,6 +3,7 @@ from flask_jwt import JWT
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from resources.item import Item, ItemList
+from resources.store import Store, StoreList
 from resources.user import UserRegister
 from security import authenticate, identity
 
@@ -26,8 +27,10 @@ def create_tables():
 
 jwt = JWT(app, authenticate, identity)  # /auth
 
+api.add_resource(Store, '/store/<string:name>')
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
+api.add_resource(StoreList, '/stores')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':
